@@ -3,17 +3,6 @@ These are the files necessary for creating (and hopefully recreating) my project
 
 If you download this whole zip, you should have everything you need. You'll obviously need to change file paths to make them match your machine. 
 
-Otherwise, this repository includes the following (organized under folders of the same names):  
-## Data:
-  ### Trees:  
-   + Maximum clade credibility trees. (5x)  
-   + 100 trees from dating analysis posteriors. (5x) 
-   + 100 trees from extinction regime exercises. (3x: Stochastic, Miocene, PlioPleistocene)  
-  ### Phenotypic and Distributional Traits
-   + Body size data (snout-vent length, body length, mass). (5x)
-   + Distributional data, in binary format for BioGeoBEARS analysis. (5x)
-   + Spreadsheet of raw body size and distributional data.
-
 # Modelling Analyses
 All analyses are detailed in the "Macropodoid_Modelling" files (.pdf, .html, .Rmd). I've included them in a number of formats with the hope that you can use them however suits you. 
 
