@@ -7,7 +7,7 @@ If you download this whole zip, you should have everything you need. You'll obvi
 All analyses are detailed in the "Macropodoid_Modelling" files (.pdf, .html, .Rmd). I've included them in a number of formats with the hope that you can use them however suits you. 
 
 # Tree Files
-Part of this project was estimating trees under a number of different dating schemes. They're listed below:
+## Part of this project was estimating trees under a number of different dating schemes. They're listed below:
     + Macro_Ages_Ranges... - trees estimated with tip age priors
     + Macro_CP_EstAges... - trees estimated with tip ages as estimated by Couzens & Prideaux
     + Macro_CP_MinAges... - trees estimated with minimum tip ages of Couzens & Prideaux
