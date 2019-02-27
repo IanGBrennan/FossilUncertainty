@@ -17,12 +17,12 @@ Otherwise, this repository includes the following (organized under folders of th
 # Modelling Analyses
 All analyses are detailed in the "Macropodoid_Modelling" files (.pdf, .html, .Rmd). I've included them in a number of formats with the hope that you can use them however suits you. 
 
-# Tree Files
-### Part of this project was estimating trees under a number of different dating schemes. They're listed below:
-    + Macro_Ages_Ranges... - trees estimated with tip age priors
-    + Macro_CP_EstAges... - trees estimated with tip ages as estimated by Couzens & Prideaux
-    + Macro_CP_MinAges... - trees estimated with minimum tip ages of Couzens & Prideaux
-    + Macro_CP_MaxAges... - trees estimated with maximum tip ages of Couzens & Prideaux
-    + Macro_MinAges... - trees estimated with minimum stratigraphic tip ages
-    + Macro_MaxAges... - trees estimated with maximum stratigraphic tip ages
-    + Tree_Span.tre - trees from posterior of all dating methods which show range of maximum and minimum estimated ages
+# Tree Files:
+  ### Part of this project was estimating trees under a number of different dating schemes. They're listed below:
+   + Macro_Ages_Ranges... - trees estimated with tip age priors
+   + Macro_CP_EstAges... - trees estimated with tip ages as estimated by Couzens & Prideaux
+   + Macro_CP_MinAges... - trees estimated with minimum tip ages of Couzens & Prideaux
+   + Macro_CP_MaxAges... - trees estimated with maximum tip ages of Couzens & Prideaux
+   + Macro_MinAges... - trees estimated with minimum stratigraphic tip ages
+   + Macro_MaxAges... - trees estimated with maximum stratigraphic tip ages
+   + Tree_Span.tre - trees from posterior of all dating methods which show range of maximum and minimum estimated ages
