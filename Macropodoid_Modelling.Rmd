@@ -24,11 +24,11 @@ Now read in the data files we'll be working with
 ```{r}
 macro.data <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/CrownHeight_Data.csv", header=T)
 min.tree <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Macro_MinAges_CON.tre")
-#mean.tree <- read.nexus("/Users/Ian/Desktop/Macropod_Dating/Operators/Macro_MeanAges_Constrained/Macro_MeanAges_HKY_Constrained_CON.tre")
-#max.tree <- read.nexus("/Users/Ian/Desktop/Macropod_Dating/Operators/Macro_MaxAges_Constrained_PF/Macro_MaxAges_HKY_Constrained_CON_fixed.tre")
-#cp.min <- read.nexus("/Users/Ian/Desktop/Macropod_Dating/Operators/Macro_CPMinAges_Constrained_PF/Macro_CP_MinAges_CON.tre")
-#cp.mean <- read.nexus("/Users/Ian/Desktop/Macropod_Dating/Operators/Macro_CPEstAges_Constrained_PF/Macro_CP_EstAges_CON.tre")
-#cp.max <- read.nexus("/Users/Ian/Desktop/Macropod_Dating/Operators/Macro_CPMaxAges_Constrained_PF/Macro_CP_MaxAges_CON.tre")
+#mean.tree <- read.nexus("/PATH/Macro_MeanAges_CON.tre")
+#max.tree <- read.nexus("/PATH/Macro_MaxAges_CON.tre")
+#cp.min <- read.nexus("/PATH/Macro_CP_MinAges_CON.tre")
+#cp.mean <- read.nexus("/PATH/Macro_CP_EstAges_CON.tre")
+#cp.max <- read.nexus("/PATH/Macro_CP_MaxAges_CON.tre")
 ```
 
 Choose the current tree we want to work with
@@ -38,7 +38,7 @@ tree <- min.tree
 
 The C4 plant reconstruction data from Andrae
 ```{r}
-enviro.data <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Andrea_S1.csv", header=T)
+enviro.data <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Andrae_S1.csv", header=T)
 head(enviro.data)
 ```
 And the dust flux data from Andrae
@@ -316,7 +316,7 @@ Save the file externally:
 # MAKE THIS EVAL=TRUE IF YOU WANT TO DO THIS BIT FOR REAL
 all.aics$age <- factor(all.aics$age, levels=c("Min_Ages", "Mean_Ages", "Max_Ages"))
 all.aics$model.type <- factor(all.aics$model.type, levels=c("ENV", "FLUX", "GRASS", "BM", "EB", "Trend"))
-#saveRDS(all.aics, file="/Users/Ian/Desktop/Macropod_Dating/Model_Fitting_AICCs.RDS")
+#saveRDS(all.aics, file="/PATH/Model_Fitting_AICCs.RDS")
 ```
 Or skip the work and read in the file instead:
 ```{r}
@@ -350,7 +350,7 @@ cp.est <- as.data.frame(unlist(lapply(age.cp.mean, MRCA.depth))); cp.est$tree <-
 age.cp.max <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/Macro_CPMaxAges_Constrained_PF/Macro_CP_MaxAges_NEWICK.trees"); age.cp.max <- age.cp.max[(length(age.cp.max)-200):length(age.cp.max)]
 cp.max <- as.data.frame(unlist(lapply(age.cp.max, MRCA.depth))); cp.max$tree <- "cp.max"; colnames(cp.max) <- c("age", "tree")
 
-age.range.strict <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/Macro_AgesRanges_LinksCorrected_STRICT/Macro_AgesRanges_LinksCorrected_Newick.trees"); age.range.strict <- age.range.strict[(length(age.range.strict)-200):length(age.range.strict)]
+age.range.strict <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/Macro_AgesRanges_LinksCorrected_STRICT/Macro_AgesRanges_NEWICK.trees"); age.range.strict <- age.range.strict[(length(age.range.strict)-200):length(age.range.strict)]
 range.strict <- as.data.frame(unlist(lapply(age.range.strict, MRCA.depth))); range.strict$tree <- "range.strict"; colnames(range.strict) <- c("age", "tree")
 
 age.all <- rbind(cp.min, cp.est, cp.max, range.strict)
