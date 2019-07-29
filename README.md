@@ -8,10 +8,13 @@ All analyses are detailed in the "Macropodoid_Modelling" files (.pdf, .html, .Rm
 
 # Tree Files:
   ### Part of this project was estimating trees under a number of different dating schemes. They're listed below:
-   + Macro_Ages_Ranges... - trees estimated with tip age priors
-   + Macro_CP_EstAges... - trees estimated with tip ages as estimated by Couzens & Prideaux
-   + Macro_CP_MinAges... - trees estimated with minimum tip ages of Couzens & Prideaux
-   + Macro_CP_MaxAges... - trees estimated with maximum tip ages of Couzens & Prideaux
-   + Macro_MinAges... - trees estimated with minimum stratigraphic tip ages
-   + Macro_MaxAges... - trees estimated with maximum stratigraphic tip ages
-   + Tree_Span.tre - trees from posterior of all dating methods which show range of maximum and minimum estimated ages
+   
+   + Tree_Span.trees - trees from posterior of all dating methods which show range of maximum and minimum estimated ages
+   + Macropodinae_Fossil.trees - trees from the all posterior dating methods which include fossil taxa unsampled for molecular/morphological data, constrained by age/topological priors
+   + Macropodinae_MaxAges - trees estimated with maximum tip ages
+   + Macropodinae_MeanAges - trees estimated with mean tip ages
+   + Macropodinae_MinAges - trees estimated with minimum tip ages
+   + Macropodinae_SampledAges - trees estimated with tip ages sampled from uniform priors
+   + Macropodinae_SampledAges_PriorOnly - trees estimated from the priors only, with tip ages sampled from uniform priors
+
+

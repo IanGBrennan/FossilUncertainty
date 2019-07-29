@@ -1,10 +1,10 @@
 ---
 title: "Macropodoid Modelling"
 author: "Ian G. Brennan"
-date: "27/02/2019"
+date: "29/07/2019"
 output:
-  html_document:
-    toc: yes
+  #html_document:
+  #  toc: yes
   pdf_document:
     toc: yes
 ---
@@ -12,122 +12,140 @@ output:
 # Getting the Data Together
 
 ```{r echo=FALSE, message=FALSE}
-library(RPANDA)
+library(RPANDA); library(randomcoloR)
 library(dplyr); library(gridExtra)
 library(geiger); library(phytools)
 library(parallel); library(pspline)
 library(mvMORPH); library(cladeMode)
-library(awtools); library(ggplot2); library(ggridges) # show_col(mpalette); or pie(rep(1, length(mpalette)), col = mpalette, labels = mpalette)
+library(awtools); library(ggplot2); 
+library(ggridges); library(gridExtra)
+library(RColorBrewer); library(deeptime);
+library(Rmisc); library(scales)
+
+
+# show_col(mpalette); or pie(rep(1, length(mpalette)), col = mpalette, labels = mpalette)
 ```
 
-Now read in the data files we'll be working with 
+Now read in the tree files we'll be working with 
 ```{r}
-macro.data <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/CrownHeight_Data.csv", header=T)
-min.tree <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Macro_MinAges_CON.tre")
+#min.tree <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Macro_MinAges_CON.tre")
 #mean.tree <- read.nexus("/PATH/Macro_MeanAges_CON.tre")
 #max.tree <- read.nexus("/PATH/Macro_MaxAges_CON.tre")
 #cp.min <- read.nexus("/PATH/Macro_CP_MinAges_CON.tre")
 #cp.mean <- read.nexus("/PATH/Macro_CP_EstAges_CON.tre")
 #cp.max <- read.nexus("/PATH/Macro_CP_MaxAges_CON.tre")
+sampled.trees   <- read.tree("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/REAL_Run5_AllSchemes_508trees_Macropodinae.trees")
+empirical.trees <- read.tree("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/MODEL110_Sampled_Run2_Macropodinae.trees")
+fossil.trees    <- read.tree("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/REAL_Run4_Fossil_519trees_Macropodinae.trees")
+consensus.tree  <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Run5_Combined123_CON.tre")
 ```
 
 Choose the current tree we want to work with
 ```{r}
-tree <- min.tree
+tree <- consensus.tree
+```
+
+And the hypsodonty data
+```{r}
+# raw data for all the macropodoid taxa
+all.HI           <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Data/CrownHeight_Data.csv", header=T)
+# or just species means for the Macropodinae
+hypsodonty.index <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Data/CrownHeight_Macropodinae_spMEANS.csv", header=T)
+head(hypsodonty.index)
 ```
 
 The C4 plant reconstruction data from Andrae
 ```{r}
 enviro.data <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Andrae_S1.csv", header=T)
-head(enviro.data)
+  grass.data <- enviro.data[1:25, c(1,3)] 
+  # this will also remove the last sample (from 9.5 mya) which is spurious, and keep just the mean estimate
+head(enviro.data); head(grass.data)
 ```
 And the dust flux data from Andrae
 ```{r}
 flux.data <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Aeolian_Flux.csv", header=T)
 head(flux.data)
 ```
-
+As well as the paleotemperature data
+```{r}
+data(InfTemp)
+head(InfTemp)
+```
 
 Trim tree and data down to overlapping taxa
 ```{r}
 # extract the taxa that are in both the tree and 
-overlaps <- intersect(tree$tip.label, unique(macro.data$Taxon))
-trim.tree <- drop.tip(tree, setdiff(tree$tip.label, overlaps))
-trim.data <- filter(macro.data, Taxon %in% overlaps)
-head(trim.data)
+overlaps <- intersect(tree$tip.label, unique(hypsodonty.index$Taxon))
+macro.tree <- drop.tip(tree, setdiff(tree$tip.label, overlaps))
+#macro.tree <- lapply(tree, drop.tip, tip=tip.drops) # if you're using a set of trees (fossil, sampled)
+trim.data <- dplyr::filter(hypsodonty.index, Taxon %in% overlaps)
+macro.HI <- trim.data[,2]; names(macro.HI) <- trim.data[,1]; geiger::name.check(macro.tree, macro.HI)
+macro.HI
 ```
-OR trim tree and data down to just Macropodinae
-```{r}
-macros <- filter(macro.data, Higher_tax == "Macropodinae")
-overlaps <- intersect(tree$tip.label, unique(macros$Taxon))
+
+If you're working with the raw data, trim tree and data down to just Macropodinae
+```{r, eval=FALSE}
+macros <- dplyr::filter(all.HI, Higher_tax == "Macropodinae")
+overlaps <- intersect(tree$tip.label, unique(all.HI$Taxon))
 trim.tree <- drop.tip(tree, setdiff(tree$tip.label, overlaps))
-trim.data <- filter(macros, Taxon %in% overlaps)
+trim.raw <- filter(macros, Taxon %in% overlaps)
 ```
 
 create a tibble to get the species means (if you haven't done this already)
 ```{r, eval=FALSE}
-  sp.means <- trim.data %>%
+  library(dplyr)
+  sp.means <- trim.raw %>%
     group_by(Taxon) %>%
-    summarise_at(vars(H_HYPCD), mean)
+    summarise_at(vars(H_HYPCD/PW), mean)
   #write.csv(sp.means, row.names=FALSE, file="/PATH/CrownHeight_Macropodinae_spMEANS.csv") # uncomment to write the file
 ```
 
-Or you can just read in the file I've already prepared for the Macropodinae:
-```{r}
-sp.means <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Couzens&Prideaux2018_dryad_package/data/CrownHeight_Macropodinae_spMEANS.csv", header=T)
-head(sp.means)
-macro.means <- sp.means$H_HYPCD; names(macro.means) <- sp.means$Taxon
-species.means <- as.data.frame(sp.means$H_HYPCD); rownames(species.means) <- sp.means$Taxon
-```
-
-If you're just working with the Macropodinae, make sure to trim the tree down
-```{r}
-macros <- filter(macro.data, Higher_tax == "Macropodinae")
-overlaps <- intersect(tree$tip.label, unique(macros$Taxon))
-trim.tree <- drop.tip(tree, setdiff(tree$tip.label, overlaps))
-```
-
-
-We were only given the mean and confidence intervals for the grass data, so let's make a function to extrapolate data from those mean and confidence intervals
-```{r}
-time.estimates <- function (some.data, reps){
-  time.col <- NULL; recon.col <- NULL
-  for(j in 1:nrow(enviro.data)) {
-    
-    time.sd <- sd(c(enviro.data$Age[j], (enviro.data$Age[j] + enviro.data$Age_Error[j]), (enviro.data$Age[j] - enviro.data$Age_Error[j])))
-    time.samples <- rnorm(reps, enviro.data$Age[j], time.sd)
-    #time.samples <- runif(reps, min=(enviro.data$Age[j] - enviro.data$Age_Error[j]), max=(enviro.data$Age[j] + enviro.data$Age_Error[j]))
-    time.col <- rbind(time.col, as.data.frame(time.samples))
-    
-    recon.sd <- sd(c(enviro.data$C4_recon_mean[j], enviro.data$C4_recon_lower[j], enviro.data$C4_recon_upper[j]))
-    recon.samples <- rnorm(reps, enviro.data$C4_recon_mean[j], recon.sd/2)
-    #recon.samples <- runif(reps, min=enviro.data$C4_recon_lower[j], max=enviro.data$C4_recon_upper[j])
-    recon.col <- rbind(recon.col, as.data.frame(recon.samples))
-  }
-  time.est.samples <- cbind(time.col, recon.col)
-  time.est.samples[time.est.samples<0] <- 0
-  time.est.samples[time.est.samples>100] <- 100
-  time.est.samples <- time.est.samples[order(time.est.samples$time.samples),]
-  return(time.est.samples)
-}
-```
-
-We'll actually reconstruct those data now:
-```{r}
-enviro <- time.estimates(enviro.data, 100)
-plot(enviro)
-```
 
 # Visualizing Our Data
 
 Let's quickly visualize the data in a few different ways to get an idea of what's going on
 ```{r}
-# first using Phenogram from Phytools
-phenogram(trim.tree, macro.means)
-#plotTree.wBars(trim.tree, macro.means, args.plotTree=list(border=F, fsize=0.5)) # type="fan"
-plotTree.barplot(trim.tree, macro.means, args.barplot=list(beside=TRUE, border=F))
-dotTree(trim.tree, macro.means, ftype="i")
+# Barplot of trait value
+plotTree.barplot(macro.tree, macro.HI, args.barplot=list(beside=TRUE, border=F))
 ```
+```{r}
+# Continuous trait map
+obj1 <- contMap(macro.tree, macro.HI, plot=FALSE, outline=F); 
+    n<-length(obj1$cols); 
+    obj1$cols[1:n] <- rev(colorRampPalette(brewer.pal(9, "YlGnBu"))(n));
+plot(obj1,legend=0.7*max(nodeHeights(obj1$tree)),
+     fsize=c(0.7,0.9), lwd=5, border=F); axisPhylo(1, backward=T)
+```
+```{r}
+# Hypsodonty distributed across feeding guilds
+hidata <- hypsodonty.index[complete.cases(hypsodonty.index[,c(1,2,4)]),]
+    hidata <- hidata[order(hidata$HI),]
+        hidata$Taxon <- factor(hidata$Taxon, levels = hidata$Taxon)
+ggplot(hidata, aes(x=Taxon, y=HI, fill=Diet_Guild), colour=brewer.pal(3,"Paired")) + 
+  geom_col() + theme_classic() + coord_flip() +
+  scale_x_discrete(limits = rev(hidata$Taxon)) +
+  scale_fill_brewer(palette="Paired", "Diet_Guild")
+```
+
+Now we can look at the time-sampled variables
+```{r}
+# make a plot of the grass data
+pp <- ggplot(enviro.data[1:25,], aes(Age)) +
+  geom_ribbon(aes(ymin = C4_recon_lower, ymax = C4_recon_upper), fill = "light green") +
+  geom_line(aes(y = C4_recon_mean), color="DarkGreen") + scale_x_reverse() + theme_classic() +
+  coord_cartesian(xlim = c(0, 20), ylim = c(0,80), expand = FALSE) 
+#qq <- gggeo_scale(pp, dat="epochs") # if you want to plot a geological timescale
+
+# make a plot of the flux data
+rr <- ggplot(flux.data, aes(Age)) +
+  geom_ribbon(aes(ymin = A_Flux-35, ymax = A_Flux+35), fill = "light blue") +
+  geom_line(aes(y = A_Flux), color="DarkBlue") + scale_x_reverse() + theme_classic() +
+  coord_cartesian(xlim = c(0, 20), ylim = c(0,150), expand = FALSE) 
+#ss <- gggeo_scale(rr, dat="epochs") # if you want to plot a geological timescale
+
+grid.arrange(pp, rr, nrow=1)
+```
+
 
 # Fitting Models of Trait Evolution
 
@@ -148,20 +166,35 @@ best.smoothing <- function (phy, trait.data, time.data=InfTemp, degrees=c(0,10,2
 
 We can have a look at what this smoothing actually does to our data. We can come back to look at these once we get the optimum fits for our models.
 ```{r}
-#grass.spline0  <- sm.spline(x=enviro$time.samples, y=enviro$recon.samples, df=0)
-#grass.spline10 <- sm.spline(x=enviro$time.samples, y=enviro$recon.samples, df=10)
-#grass.spline20 <- sm.spline(x=enviro$time.samples, y=enviro$recon.samples, df=20)
-grass.spline30 <- sm.spline(x=enviro$time.samples, y=enviro$recon.samples, df=30)
-grass.spline40 <- sm.spline(x=enviro$time.samples, y=enviro$recon.samples, df=40)
-grass.spline50 <- sm.spline(x=enviro$time.samples, y=enviro$recon.samples, df=50)
+grass.spline0  <- sm.spline(x=grass.data$Age, y=grass.data$C4_recon_mean, df=0)
+grass.spline10 <- sm.spline(x=grass.data$Age, y=grass.data$C4_recon_mean, df=10)
+grass.spline20 <- sm.spline(x=grass.data$Age, y=grass.data$C4_recon_mean, df=20)
+grass.spline30 <- sm.spline(x=grass.data$Age, y=grass.data$C4_recon_mean, df=30)
+grass.spline40 <- sm.spline(x=grass.data$Age, y=grass.data$C4_recon_mean, df=40)
+grass.spline50 <- sm.spline(x=grass.data$Age, y=grass.data$C4_recon_mean, df=50)
 
-plot(enviro, main="C4 Grass Reconstruction Through Time", xlab="Millions of Years Ago", ylab="Percent C4")
-#lines(grass.spline0, col="red", lwd=4)
-#lines(grass.spline10, col="green", lwd=4)
-#lines(grass.spline20, col="blue", lwd=4)
+plot(grass.data, main="C4 Grass Reconstruction Through Time", xlab="Millions of Years Ago", ylab="Percent C4")
+lines(grass.spline0, col="red", lwd=4)
+lines(grass.spline10, col="green", lwd=4)
+lines(grass.spline20, col="blue", lwd=4)
 lines(grass.spline30, col="yellow", lwd=4)
 lines(grass.spline40, col="violet", lwd=4)
 lines(grass.spline50, col="gold", lwd=4)
+
+flux.spline0  <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=0)
+flux.spline10 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=10)
+flux.spline20 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=20)
+flux.spline30 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=30)
+flux.spline40 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=40)
+flux.spline50 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=50)
+
+plot(flux.data, main="Aeolian Dust Flux Through Time", xlab="Millions of Years Ago", ylab="Aeolian Dust Flux")
+lines(flux.spline0, col="red", lwd=4)
+lines(flux.spline10, col="green", lwd=4)
+lines(flux.spline20, col="blue", lwd=4)
+lines(flux.spline30, col="yellow", lwd=4)
+lines(flux.spline40, col="magenta", lwd=4)
+lines(flux.spline50, col="cyan", lwd=4)
 
 data(InfTemp)
 env.spline0 <- sm.spline(x=InfTemp$Age, y=InfTemp$Temperature, df=0)
@@ -178,59 +211,55 @@ lines(env.spline20, col="blue")
 lines(env.spline30, col="yellow")
 lines(env.spline40, col="magenta")
 lines(env.spline50, col="cyan")
-
-flux.spline0  <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=0)
-flux.spline10 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=10)
-flux.spline20 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=20)
-flux.spline30 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=30)
-flux.spline40 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=40)
-flux.spline50 <- sm.spline(x=flux.data$Age, y=flux.data$A_Flux, df=50)
-
-plot(flux.data, main="Aeolian Dust Flux Through Time", xlab="Millions of Years Ago", ylab="Aeolian Dust Flux")
-lines(flux.spline0, col="red", lwd=4)
-lines(flux.spline10, col="green", lwd=4)
-lines(flux.spline20, col="blue", lwd=4)
-lines(flux.spline30, col="yellow", lwd=4)
-lines(flux.spline40, col="magenta", lwd=4)
-lines(flux.spline50, col="cyan", lwd=4)
 ```
 
 ### Next we'll fit a number of models to our tree and data
 Start with the environmental model of paleotemperature. You can designate the number of cores and the amount of smoothing
 ```{r}
 # linear model first
-ENVexp <- best.smoothing(trim.tree, macro.means, time.data=InfTemp, degrees=c(10,20,30,40,50), model="EnvExp", cores=5)
+ENVexp <- best.smoothing(macro.tree, macro.HI, time.data=InfTemp, 
+                         degrees=c(10,20,30,40,50), model="EnvExp", cores=5)
 # exponential model next
-ENVlin <- best.smoothing(trim.tree, macro.means, time.data=InfTemp, degrees=c(10,20,30,40,50), model="EnvLin", cores=5)
+ENVlin <- best.smoothing(macro.tree, macro.HI, time.data=InfTemp, 
+                         degrees=c(10,20,30,40,50), model="EnvLin", cores=5)
 ```
+
 Next up the grass model, using C4 reconstructions.
 ```{r}
-GRASSexp <- best.smoothing(trim.tree, macro.means, time.data=enviro, degrees=c(30,40,50), model="EnvExp", cores=3)
-GRASSlin <- best.smoothing(trim.tree, macro.means, time.data=enviro, degrees=c(30,40,50), model="EnvLin", cores=3)
+GRASSexp <- best.smoothing(macro.tree, macro.HI, time.data=grass.data, 
+                           degrees=c(10,20,30,40,50), model="EnvExp", cores=5)
+GRASSlin <- best.smoothing(macro.tree, macro.HI, time.data=grass.data, 
+                           degrees=c(10,20,30,40,50), model="EnvLin", cores=5)
 ```
+
 And finally the flux models, using aeolian dust measurements.
 ```{r}
-FLUXexp <- best.smoothing(trim.tree, macro.means, time.data=flux.data, degrees=c(10,20,30,40,50), model="EnvExp", cores=5)
-FLUXlin <- best.smoothing(trim.tree, macro.means, time.data=flux.data, degrees=c(10,20,30,40,50), model="EnvLin", cores=5)
+FLUXexp <- best.smoothing(macro.tree, macro.HI, time.data=flux.data, 
+                          degrees=c(10,20,30,40,50), model="EnvExp", cores=5)
+FLUXlin <- best.smoothing(macro.tree, macro.HI, time.data=flux.data, 
+                          degrees=c(10,20,30,40,50), model="EnvLin", cores=5)
 ```
+
 Lastly, for comparison, run a few standard models. These are Brownian Motion, Brownian Motion with a Trend, and Early Burst.
 ```{r}
-BM_res <- fitContinuous(trim.tree, species.means, model="BM")
-trend_res <- fitContinuous(trim.tree, species.means, model="trend")
-EB_res <- fitContinuous(trim.tree, species.means, model="EB")
+BM_res <-    fitContinuous(macro.tree, macro.HI, model="BM")
+trend_res <- fitContinuous(macro.tree, macro.HI, model="trend")
+EB_res <-    fitContinuous(macro.tree, macro.HI, model="EB")
 ```
 
 Compare the models with AICc, and check differences across the trees
 ```{r}
 model_FIT <- c(ENVexp$best.result$aicc, ENVlin$best.result$aicc, 
-                  GRASSexp$best.result$aicc, FLUXexp$best.result$aicc, FLUXlin$best.result$aicc, #GRASSlin$best.result$aicc, 
-                  BM_res$opt$aicc, trend_res$opt$aicc, EB_res$opt$aicc); names(model_FIT) <- c("ENVexp", "ENVlin", "GRASSexp", "FLUXexp", "FLUXlin", "BM", "Trend", "EB")
+               GRASSlin$best.result$aicc, GRASSexp$best.result$aicc, 
+               FLUXexp$best.result$aicc, FLUXlin$best.result$aicc, 
+               BM_res$opt$aicc, trend_res$opt$aicc, EB_res$opt$aicc); 
+names(model_FIT) <- c("ENVexp", "ENVlin", "GRASSlin", "GRASSexp", "FLUXexp", "FLUXlin", "BM", "Trend", "EB")
 aic.w(model_FIT)
-fit.aic <- as.data.frame(as.vector(aic.w(model_FIT))); fit.aic$model <- names(model_FIT); colnames(fit.aic) <- c("aiccw", "model"); fit.aic$age <- "Min_Ages"
+fit.aic <- as.data.frame(as.vector(aic.w(model_FIT))); fit.aic$model <- names(model_FIT); colnames(fit.aic) <- c("aiccw", "model"); fit.aic$age <- "Consensus Tree"
 ```
 Quickly collapse models from the same data 
 ```{r}
-fit.aic$model.type <- c("ENV", "ENV", "GRASS", "FLUX", "FLUX", "BM", "Trend", "EB")
+fit.aic$model.type <- c("ENV", "ENV", "GRASS", "GRASS", "FLUX", "FLUX", "BM", "Trend", "EB")
 fit.aic$model.type <- factor(fit.aic$model.type, levels=c("ENV", "FLUX", "GRASS", "BM", "EB", "Trend"))
 ```
 Then plot the model fits as AICc weights
@@ -243,144 +272,255 @@ library(wesanderson)
   + scale_fill_manual( values=wes_palette("Zissou1", 6, "continuous")))
 ```
 
-We can further look at our data by plottin Disparity Through Time to our data
-```{r, echo=FALSE}
-dtt_tooth <- dtt(trim.tree, species.means, nsim=1000, plot=T)
-```
-Then we can simulate data under the preferred model (GRASSexp or GRASSlin) to see if our data fits the expectation.
-```{r}
-simGRASSexp <- sim_t_env(trim.tree, GRASSexp$best.result$param, model="EnvExp", env_data=enviro,
-          root.value=GRASSexp$best.result$root, plot=T)
-simGRASSlin <- sim_t_env(trim.tree, GRASSlin$best.result$param, model="EnvLin", env_data=enviro,
-                         root.value=GRASSlin$best.result$root, plot=T)
-```
-And again run DTT on our simulated data to see if the patterns hold up.
-```{r}
-dttGRASSexp <- dtt(trim.tree, simGRASSexp, nsim=100, plot=T) 
-dttGRASSlin <- dtt(trim.tree, simGRASSlin, nsim=100, plot=T)
-# obviously you'll increase the nsim to >1000.
-```
 
 # Fitting Models to Our Data as a Function of Time
 
-Ok, now that we've fit the models to a given tree, we want to fit the models to lots of trees of different ages, shapes, etc. Let's read in a file I've made of trees from the whole span of dating analyses.
-```{r}
-tree.span <- read.tree("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Tree_Span.tre")
-tree.span
-```
-Now we'll run a loop across all of these trees, to fit the models to each one. It may take a little while.
+Ok, now that we've fit the models to a given tree, we want to fit the models to lots of trees of different ages, shapes, etc. Now we'll run a loop across all of these trees, to fit the models to each one. It may take a little while.
 ```{r, eval=FALSE}
 # MAKE THIS EVAL=TRUE IF YOU WANT TO DO THIS BIT FOR REAL
-all.aics <- NULL; all.results <- NULL
+tree.span <- fossil.trees
+mean.data <- fossil.HI
+# Fit all the models to a series of trees!
+all.aics <- NULL; all.results <- NULL; timer <- progress_estimated(length(tree.span))
 for (k in 1:length(tree.span)){
-  beginning <- Sys.time()
   int.results <- NULL
   
   # Fit a number of models to the data (ENV, GRASS, BM, EB, Trend, Drift)
-  ENVexp <- best.smoothing(tree.span[[k]], macro.means, time.data=InfTemp, degrees=c(10,20,30,40,50), model="EnvExp", cores=5); int.results[["ENVexp"]] <- ENVexp$best.result; 
-  ENVlin <- best.smoothing(tree.span[[k]], macro.means, time.data=InfTemp, degrees=c(10,20,30,40,50), model="EnvLin", cores=5); int.results[["ENVlin"]] <- ENVlin$best.result; 
+  ENVexp <- best.smoothing(tree.span[[k]], mean.data, time.data=InfTemp, 
+                           degrees=c(10,20,30,40,50), model="EnvExp", cores=5); 
+                           int.results[["ENVexp"]] <- ENVexp$best.result; 
+  ENVlin <- best.smoothing(tree.span[[k]], mean.data, time.data=InfTemp, 
+                           degrees=c(10,20,30,40,50), model="EnvLin", cores=5); 
+                           int.results[["ENVlin"]] <- ENVlin$best.result; 
   
-  GRASSexp <- best.smoothing(tree.span[[k]], macro.means, time.data=testo, degrees=c(30,50), model="EnvExp", cores=3); int.results[["GRASSexp"]] <- GRASSexp$best.result; 
-  #GRASSlin <- best.smoothing(trim.tree, macro.means, time.data=testo, degrees=c(30,40,50), model="EnvLin", cores=3)
+  GRASSexp <- best.smoothing(tree.span[[k]], mean.data, time.data=grass.data, 
+                             degrees=c(30,40,50), model="EnvExp", cores=3); 
+                             int.results[["GRASSexp"]] <- GRASSexp$best.result; 
+  GRASSlin <- best.smoothing(tree.span[[k]], mean.data, time.data=grass.data, 
+                             degrees=c(30,40,50), model="EnvLin", cores=3); 
+                             int.results[["GRASSlin"]] <- GRASSlin$best.result;
   
-  FLUXexp <- best.smoothing(tree.span[[k]], macro.means, time.data=flux.data, degrees=c(10,20,30,40,50), model="EnvExp", cores=5); int.results[["FLUXexp"]] <- FLUXexp$best.result; 
-  FLUXlin <- best.smoothing(tree.span[[k]], macro.means, time.data=flux.data, degrees=c(10,20,30,40,50), model="EnvLin", cores=5); int.results[["FLUXlin"]] <- FLUXlin$best.result; 
+  FLUXexp <- best.smoothing(tree.span[[k]], mean.data, time.data=flux.data, 
+                            degrees=c(10,20,30,40,50), model="EnvExp", cores=5); 
+                            int.results[["FLUXexp"]] <- FLUXexp$best.result; 
+  FLUXlin <- best.smoothing(tree.span[[k]], mean.data, time.data=flux.data, 
+                            degrees=c(10,20,30,40,50), model="EnvLin", cores=5); 
+                            int.results[["FLUXlin"]] <- FLUXlin$best.result; 
   
-  BM_res    <- fitContinuous(tree.span[[k]], species.means, model="BM"); int.results[["BM"]] <- BM_res
-  trend_res <- fitContinuous(tree.span[[k]], species.means, model="trend"); int.results[["Trend"]] <- trend_res
-  EB_res    <- fitContinuous(tree.span[[k]], species.means, model="EB"); int.results[["EB"]] <- EB_res
+  BM_res    <- fitContinuous(tree.span[[k]], mean.data, model="BM"); 
+               int.results[["BM"]] <- BM_res
+  trend_res <- fitContinuous(tree.span[[k]], mean.data, model="trend"); 
+               int.results[["Trend"]] <- trend_res
+  EB_res    <- fitContinuous(tree.span[[k]], mean.data, model="EB"); 
+               int.results[["EB"]] <- EB_res
   
   curr_tree_FIT <- c(ENVexp$best.result$aicc, ENVlin$best.result$aicc, 
-                    GRASSexp$best.result$aicc, FLUXexp$best.result$aicc, FLUXlin$best.result$aicc, #GRASSlin$best.result$aicc,
-                    BM_res$opt$aicc, trend_res$opt$aicc, EB_res$opt$aicc); names(curr_tree_FIT) <- c("ENVexp", "ENVlin", "GRASSexp", "FLUXexp", "FLUXlin", "BM", "Trend", "EB")
+                    GRASSexp$best.result$aicc, GRASSlin$best.result$aicc, 
+                    FLUXexp$best.result$aicc, FLUXlin$best.result$aicc,
+                    BM_res$opt$aicc, trend_res$opt$aicc, EB_res$opt$aicc); 
+  names(curr_tree_FIT) <- c("ENVexp", "ENVlin", "GRASSexp", "GRASSlin", 
+                            "FLUXexp", "FLUXlin", "BM", "Trend", "EB")
+  
+  curr_tree_SIG <- c(ENVexp$best.result$param[[1]], ENVlin$best.result$param[[1]], 
+                     GRASSexp$best.result$param[[1]], GRASSlin$best.result$param[[1]], 
+                     FLUXexp$best.result$param[[1]], FLUXlin$best.result$param[[1]],
+                     BM_res$opt$sigsq, trend_res$opt$sigsq, EB_res$opt$sigsq); 
+  names(curr_tree_SIG) <- c("ENVexp", "ENVlin", "GRASSexp", "GRASSlin", 
+                            "FLUXexp", "FLUXlin", "BM", "Trend", "EB")
+  
+  curr_tree_PAR <- c(ENVexp$best.result$param[[2]], ENVlin$best.result$param[[2]], 
+                     GRASSexp$best.result$param[[2]], GRASSlin$best.result$param[[2]], 
+                     FLUXexp$best.result$param[[2]], FLUXlin$best.result$param[[2]],
+                     NA, trend_res$opt$slope, EB_res$opt$a); 
+  names(curr_tree_PAR) <- c("ENVexp", "ENVlin", "GRASSexp", "GRASSlin", 
+                            "FLUXexp", "FLUXlin", "BM", "Trend", "EB")
+  
   curr.aic <- as.data.frame(as.vector(aic.w(curr_tree_FIT))); 
         curr.aic$model <- names(curr_tree_FIT); colnames(curr.aic) <- c("aiccw", "model"); 
-            curr.aic$age <- round(max(nodeHeights(tree.span[[k]])), 3)
+            curr.aic$age <- round(max(nodeHeights(tree.span[[k]])), 4)
                 curr.aic$tree <- k
+                    curr.aic$sigsq <- curr_tree_SIG
+                        curr.aic$par <- curr_tree_PAR
   all.results[[k]] <- int.results
   
-  curr.aic$model.type <- c("ENV", "ENV", "GRASS", "FLUX", "FLUX", "BM", "Trend", "EB")
-  
-  # ENVexp <- ENVexp$best.result;  ENVlin <- ENVlin$best.result; GRASSexp <- GRASSexp$best.result; FLUXexp <- FLUXexp$best.result;  FLUXlin <- FLUXlin$best.result
-  # curr.aic[which(curr.aic$aiccw == max(curr.aic$aiccw)),"model"]
+  curr.aic$model.type <- c("ENV", "ENV", "GRASS", "GRASS", 
+                           "FLUX", "FLUX", "BM", "Trend", "EB")
   
   all.aics <- rbind.data.frame(all.aics, curr.aic); 
+
+  print(timer$tick())
   
-  end <- Sys.time()
-  duration <- format(end-beginning)
-  print(paste("Computation time :", duration))
 }
 ```
+
 Save the file externally:
 ```{r, eval=FALSE}
-# MAKE THIS EVAL=TRUE IF YOU WANT TO DO THIS BIT FOR REAL
-all.aics$age <- factor(all.aics$age, levels=c("Min_Ages", "Mean_Ages", "Max_Ages"))
-all.aics$model.type <- factor(all.aics$model.type, levels=c("ENV", "FLUX", "GRASS", "BM", "EB", "Trend"))
+saveRDS(all.aics,    file="/PATH/Fossil_Trees_Model_Fitting_AICCs.RDS")
+saveRDS(all.results, file="/PATH/Fossil_Trees_Model_Fitting_Results.RDS")
 #saveRDS(all.aics, file="/PATH/Model_Fitting_AICCs.RDS")
 ```
 Or skip the work and read in the file instead:
 ```{r}
-all.aics <- readRDS("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Model_Fitting.RDS")
+all.aics <- readRDS("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Data/FINAL_SAMPLED_Model_Fitting_AICCs.RDS")
+all.aics$model.type <- factor(all.aics$model.type, levels=c("ENV", "FLUX", "GRASS", "BM", "EB", "Trend"))
 all.aics$age <- as.factor(all.aics$age)
 ```
 
 ```{r}
-(ggplot(all.aics)
+sampled.res <- (ggplot(all.aics)
   + geom_bar(aes(y=aiccw, x=age, fill=model.type), stat="identity")
-  + theme(axis.text.x=element_text(angle=90, hjust=1), panel.background=element_blank(), legend.position="bottom")
+  + theme(axis.text.x=element_text(angle=90, hjust=1), panel.background=element_blank(), legend.position="none")
   + scale_fill_manual( values=wes_palette("Zissou1", 6, "continuous")))
+sampled.res
 ```
 
+And then summarize the model support (average AICcWt) across all trees
+```{r}
+# Summarize the model support (average AICcWt)
+aic.sum <- summarySE(all.aics, measurevar="aiccw", groupvars="model")
+aic.sum$model <- factor(aic.sum$model, levels=c("ENVlin", "ENVexp", "FLUXlin", "FLUXexp", "GRASSexp", "GRASSlin", "BM", "EB", "Trend"))
+aic.sum$model.type <- c("BM", "EB", "ENV", "ENV", "FLUX", "FLUX", "GRASS", "GRASS", "Trend")
+aic.sum$model.type <- factor(aic.sum$model.type, levels=c("ENV", "FLUX", "GRASS", "BM", "EB", "Trend"))
+
+fossil.bar <- (ggplot(aic.sum, aes(x=model.type, y=aiccw, fill=model.type))
+  + geom_bar(stat="identity")
+  #+ geom_errorbar(aes(ymin=aiccw-se, ymax=aiccw+se), size=0.3, width=0.2)
+  + scale_fill_manual( values=wes_palette("Zissou1", 6, "continuous"))
+  + theme_classic()
+  + theme(legend.position="none")
+  #+ facet_wrap(~group, nrow=3, ncol=2)
+  + geom_text(aes(label=percent(aiccw), vjust=-4)))
+fossil.bar
+```
+
+We can also visualize the estimated evolutionary rates of the trait.  
+First create an adjusted version of the plotting function from RPANDA:
+```{r}
+# Adjust the RPANDA plotting function so we can fix the axes, and do a bunch of plots
+plot.fixed_t_env <- function (x, steps = 100, 
+                              xlim=c(-10,0), ylim=c(0,1), linecol="red", ...) 
+{
+  if (is.function(x$model)) {
+    fun_temp <- function(x, temp, model, param) {
+      rate_fun <- function(x) {
+        model(x, temp, param)
+      }
+      rate <- rate_fun(x)
+      return(rate)
+    }
+  }
+  else if (x$model == "EnvExp") {
+    fun_temp <- function(x, temp, model, param) {
+      sig <- param[1]
+      beta <- param[2]
+      rate <- (sig * exp(beta * temp(x)))
+      return(rate)
+    }
+  }
+  else if (x$model == "EnvLin") {
+    fun_temp <- function(x, temp, model, param) {
+      sig <- param[1]
+      beta <- param[2]
+      rate <- sig + (beta - sig) * temp(x)
+      return(rate)
+    }
+  }
+  t <- seq(0, x$tot_time, length.out = steps)
+  rates <- fun_temp(x = t, temp = x$env_func, model = x$model, 
+                    param = x$param)
+  plot(-t, rates, type = "l", xlab = "Times", 
+       ylab = bquote(paste("Evolutionary rates ",sigma)), 
+       xlim=xlim, ylim=ylim, col=linecol, ...)
+  results <- list(time_steps = t, rates = rates)
+  invisible(results)
+}
+```
+
+I'll plot just the results from the GRASS-linear model, but you could do this for all.
+```{r}
+all.aics <- readRDS("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Data/FINAL_SAMPLED_Model_Fitting_AICCs.RDS")
+all.grass.results <- readRDS("/Users/Ian/Desktop/REAL_SAMPLED_GRASS_Model_Fitting_AllResults.RDS")
+sub.aic <- filter(all.aics, model=="GRASSlin" & aiccw > 0.5); sub.trees <- sub.aic$tree; print(paste(length(sub.trees), "estimates"))
+for(i in sub.trees){plot.fixed_t_env(all.grass.results[[i]]$GRASSlin, 
+                                     xlim=c(-12,0), ylim=c(0,0.2), 
+                                     linecol=randomcoloR::randomColor(1)); 
+  par(new=T)}
+```
+
+Also plot the beta value of the correlation between rate and the variable
+```{r}
+# And plot the beta values for preferred models
+col.pal <- brewer.pal(8, "Paired")
+beta.values <- filter(all.aics, model %in% c("GRASSexp", "FLUXexp", "GRASSlin", "ENVexp") & aiccw >= 0.3); #beta.values <- filter(beta.values, par<70 & par>-25)
+ge_beta <- filter(beta.values, model=="GRASSexp"); ge <- ggplot(ge_beta, aes(x=model, y=par)) + geom_violin(fill=col.pal[[4]]) + theme_classic() + geom_boxplot(fill="white", width=0.075) #+ geom_dotplot(binaxis="y", dotsize=0.1, binwidth=5)
+gl_beta <- filter(beta.values, model=="GRASSlin"); gl <- ggplot(gl_beta, aes(x=model, y=par)) + geom_violin(fill=col.pal[[3]]) + theme_classic() + geom_boxplot(fill="white", width=0.075) #+ geom_dotplot(binaxis="y", dotsize=0.1, binwidth=5)
+fe_beta <- filter(beta.values, model=="FLUXexp" ); fe <- ggplot(fe_beta, aes(x=model, y=par)) + geom_violin(fill=col.pal[[1]]) + theme_classic() + geom_boxplot(fill="white", width=0.075) #+ geom_dotplot(binaxis="y", dotsize=0.1, binwidth=5)
+ee_beta <- filter(beta.values, model=="ENVexp"  ); ee <- ggplot(ee_beta, aes(x=model, y=par)) + geom_violin(fill=col.pal[[2]]) + theme_classic() + geom_boxplot(fill="white", width=0.075) #+ geom_dotplot(binaxis="y", dotsize=0.1, binwidth=5)
+gridExtra::grid.arrange(gl, ge, fe, ee, nrow=1)
+```
 
 # Comparing Estimated Node Ages Across Dating Schemes
 
 Make a quick function to get the DEPTH of a node (from present), instead of the HEIGHT (from root)
 ```{r}
-MRCA.depth <- function(phy){max(nodeHeights(phy)) - findMRCA(phy, tips=c("Setonix_brachyurus", "Wallabia_bicolor"), type="height")}
+MRCA.depth <- function(phy){max(nodeHeights(phy)) - findMRCA(phy, tips=c("Macropus_irma", "Wallabia_bicolor"), type="height")}
 ```
 
 Prepare trees for comparison of ages
 ```{r}
-age.cp.min  <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/Macro_CPMinAges_Constrained_PF/Macro_CP_MinAges_NEWICK.trees"); age.cp.min <- age.cp.min[(length(age.cp.min)-200):length(age.cp.min)]
-cp.min <- as.data.frame(unlist(lapply(age.cp.min, MRCA.depth))); cp.min$tree <- "cp.min"; colnames(cp.min) <- c("age", "tree")
+# Prepare trees for comparison of ages
+max.age.trees <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Alternative_Dating_Schemes/Max_Run_Combined1234.trees"); 
+max.ages <- max.age.trees[sample(1:length(max.age.trees),300)]
+#max.ages <- lapply(max.age.trees, drop.tip, tip=setdiff(max.age.trees[[1]]$tip.label, overlaps)); class(max.ages) <- "multiPhylo"; 
+age.max <- as.data.frame(unlist(lapply(max.ages, MRCA.depth))); 
+age.max$tree <- "fixed.max"; colnames(age.max) <- c("age", "tree")
 
-age.cp.mean <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/Macro_CPEstAges_Constrained_PF/Macro_CP_EstAges_NEWICK.trees"); age.cp.mean <- age.cp.mean[(length(age.cp.mean)-200):length(age.cp.mean)]
-cp.est <- as.data.frame(unlist(lapply(age.cp.mean, MRCA.depth))); cp.est$tree <- "cp.est"; colnames(cp.est) <- c("age", "tree")
+mean.age.trees <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Alternative_Dating_Schemes/Mean_Run_Combined1234.trees"); 
+mean.ages <- mean.age.trees[sample(1:length(mean.age.trees),300)]
+#mean.ages <- lapply(mean.age.trees, drop.tip, tip=setdiff(mean.age.trees[[1]]$tip.label, overlaps)); class(mean.ages) <- "multiPhylo"
+age.mean <- as.data.frame(unlist(lapply(mean.ages, MRCA.depth))); 
+age.mean$tree <- "fixed.mean"; colnames(age.mean) <- c("age", "tree")
 
-age.cp.max <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/Macro_CPMaxAges_Constrained_PF/Macro_CP_MaxAges_NEWICK.trees"); age.cp.max <- age.cp.max[(length(age.cp.max)-200):length(age.cp.max)]
-cp.max <- as.data.frame(unlist(lapply(age.cp.max, MRCA.depth))); cp.max$tree <- "cp.max"; colnames(cp.max) <- c("age", "tree")
+min.age.trees <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Alternative_Dating_Schemes/Min_Run_Combined1234.trees"); min.ages <- min.age.trees[sample(1:length(min.age.trees),300)]
+#min.ages <- lapply(min.age.trees, drop.tip, tip=setdiff(min.age.trees[[1]]$tip.label, overlaps)); class(min.ages) <- "multiPhylo"
+age.min <- as.data.frame(unlist(lapply(min.ages, MRCA.depth))); 
+age.min$tree <- "fixed.min"; colnames(age.min) <- c("age", "tree")
 
-age.range.strict <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/Macro_AgesRanges_LinksCorrected_STRICT/Macro_AgesRanges_NEWICK.trees"); age.range.strict <- age.range.strict[(length(age.range.strict)-200):length(age.range.strict)]
-range.strict <- as.data.frame(unlist(lapply(age.range.strict, MRCA.depth))); range.strict$tree <- "range.strict"; colnames(range.strict) <- c("age", "tree")
-
-age.all <- rbind(cp.min, cp.est, cp.max, range.strict)
-age.all$tree <- factor(age.all$tree, levels=c("cp.max", "range.strict", "cp.est", "cp.min"))
+sampled500.trees <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Run5_Combined123.trees"); 
+sampled.ages <- sampled500.trees[sample(1:length(sampled500.trees),300)]
+sampled500.trees <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Run5_Combined123.trees"); 
+sampled.ages <- sampled500.trees[(length(sampled500.trees)-200):length(sampled500.trees)]
+#min.ages <- lapply(min.age.trees, drop.tip, tip=setdiff(min.age.trees[[1]]$tip.label, overlaps)); class(min.ages) <- "multiPhylo"
+age.sampled <- as.data.frame(unlist(lapply(sampled.ages, MRCA.depth))); age.sampled$tree <- "est.prior"; colnames(age.sampled) <- c("age", "tree")
 ```
 
+Combine the ages from different dating schemes, and plot them
 ```{r}
+age.all <- rbind(age.min, age.sampled, age.mean, age.max)
+age.all$tree <- factor(age.all$tree, levels=c("fixed.max","est.prior", "fixed.mean", "fixed.min"))
 (ggplot(age.all, aes(x=age, fill=tree))
   + geom_density(alpha=0.75, adjust=1.5)
   + theme(axis.text.x=element_text(angle=0, hjust=1), panel.background=element_blank(), legend.position="bottom")
   + scale_fill_manual(values=wes_palette("Zissou1", type="continuous", 4))
-  + scale_x_reverse(lim=c(19,9)))
+  + scale_x_reverse(lim=c(8,0)))
 ```
 
 
 # Getting Bayes Factors for Fossil Taxa
 ### Investigating Fossil Taxa as putative Sampled Ancestors or Terminals
 ```{r}
-prior.trees <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Prior_Only_NEWICK.trees"); prior.trees <- prior.trees[(length(prior.trees)-200):length(prior.trees)]
-post.trees <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Macro_CP_EstAges_NEWICK.trees"); post.trees <- post.trees[(length(post.trees)-200):length(post.trees)]
+prior.trees <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Alternative_Dating_Schemes_PriorOnly/Mean_1/All_Macropodinae_FBD_Relax_PRIOR.trees"); 
+prior.trees <- prior.trees[(length(prior.trees)-1000):length(prior.trees)]
+post.trees  <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Alternative_Dating_Schemes/Mean_Run_Combined1234.trees"); 
+post.trees <- post.trees[(length(post.trees)-1000):length(post.trees)]
+
+
 ```
 
 Choose which tips you want information for:
 ```{r}
-fossil_taxa <- c("Baringa_nelsonensis", "Bohra_illuminata", "Congruus_congruus",
-                 "Dorcopsoides_fossilis", "Ganguroo_bilamina","Hadronomas_puckridgi",
-                 "Kurrabi_mahoneyi","Macropus_pavana","Ngamaroo_archeri",
-                 "Bulungamaya_delicata","Prionotemnus_palankarinnicus",
-                 "Procoptodon_goliah","Protemnodon_anak","Simosthenurus_occidentalis",
-                 "Sthenurus_andersoni","Troposodon_minor","Wanburoo_hilarus")
+fossil_taxa <- c("Baringa_nelsonensis","Congruus_congruus",
+                 "Kurrabi_mahoneyi","Macropus_pavana")
 ```
 Get the node numbers of the tips
 ```{r}
@@ -438,7 +578,7 @@ macro_BFs$taxa <- rownames(macro_BFs); # create column with the taxon names
 macro_BFs <- macro_BFs[order(macro_BFs$macro_BFs),] # reorder by BF values
 # set colors for plotting
 macro_BFs$color <- "black";
-macro_BFs[which(macro_BFs$macro_BFs > 1),]$color <- "#3d98d3"
+#macro_BFs[which(macro_BFs$macro_BFs > 1),]$color <- "#3d98d3"
 macro_BFs[which(macro_BFs$macro_BFs < -1),]$color <- "#FF7175"
 
 macro_BFs$taxa <- factor(macro_BFs$taxa, levels=c(macro_BFs$taxa)) # set factors for plotting (NOT NECESSARY)
@@ -446,7 +586,7 @@ macro_BFs$taxa <- factor(macro_BFs$taxa, levels=c(macro_BFs$taxa)) # set factors
 Then plot the data
 ```{r}
 ggplot(macro_BFs, aes(x=taxa, y=macro_BFs, label=macro_BFs)) + 
-  geom_ribbon(ymin=-1, ymax=+1) +
+  geom_ribbon(aes(ymin=-1, ymax=+1)) +
   geom_point(stat='identity', size=8, color=macro_BFs$color)  +
   # geom_segment(aes(y = 0, 
   #                  x = taxa, 
@@ -457,36 +597,15 @@ ggplot(macro_BFs, aes(x=taxa, y=macro_BFs, label=macro_BFs)) +
   #labs(title="Bayes Factor Support", subtitle="for Fossil Taxa as Sampled Ancestors") + 
   #ylim(-5, 5) +
   scale_y_continuous(name="log Bayes Factors", limits=c(-5,5), breaks=c(-5:5)) +
+  scale_x_discrete(limits = rev(unique(sort(macro_BFs$taxa)))) + # drop this if you want to order it differently
   #theme(panel.background=element_blank()) +
   geom_hline(yintercept=-1) +
   geom_hline(yintercept=1) +
   xlab("Fossil Taxa") +
   #ylab("log Bayes Factors") +
   theme_classic() +
+  #theme(axis.text.y=element_blank(), axis.title.y=element_blank()) +
   coord_flip()
-```
-
-
-Plot the C4 and Flux data on a geological time scale
-```{r}
-library(deeptime); library(gridExtra)
-
-pp <- ggplot(enviro.data, aes(Age)) +
-  geom_ribbon(aes(ymin = C4_recon_lower, ymax = C4_recon_upper), fill = "pink") +
-  geom_line(aes(y = C4_recon_mean), color="red") + scale_x_reverse() + theme_classic() +
-  coord_cartesian(xlim = c(0, 10), ylim = c(0,80), expand = FALSE) 
-
-qq <- gggeo_scale(pp, dat="epochs")
-
-
-rr <- ggplot(flux.data, aes(Age)) +
-  geom_ribbon(aes(ymin = A_Flux-35, ymax = A_Flux+35), fill = "light blue") +
-  geom_line(aes(y = A_Flux), color="blue") + scale_x_reverse() + theme_classic() +
-  coord_cartesian(xlim = c(0, 13), ylim = c(0,150), expand = FALSE) 
-
-ss <- gggeo_scale(rr, dat="epochs")
-
-grid.arrange(qq, ss, nrow=1)
 ```
 
 # Investigating estimated ages of fossils
@@ -625,28 +744,12 @@ test <- print.tree(post.trees[[1]])
 Now pull out the info on those fossils
 ```{r}
 my.test <- get.fossil.ages(fossil.tips = fossil_taxa, trees = post.trees)
-my.test$label <- factor(my.test$label, levels=c("Bulungamaya_delicata",
-                                                "Protemnodon_anak",
-                                                "Sthenurus_andersoni",
-                                                "Troposodon_minor",
-                                                "Baringa_nelsonensis",
-                                                "Prionotemnus_palankarinnicus",
-                                                "Congruus_congruus",
-                                                "Bohra_illuminata",
-                                                "Kurrabi_mahoneyi",
-                                                "Ngamaroo_archeri",
-                                                "Dorcopsoides_fossilis",
-                                                "Wanburoo_hilarus",
-                                                "Ganguroo_bilamina",
-                                                "Hadronomas_puckridgi",
-                                                "Simosthenurus_occidentalis",
-                                                "Macropus_pavana",
-                                                "Procoptodon_goliah"))
 
 (ggplot(my.test, aes(x=time_bp, y=label, fill=..x..)) 
   + scale_fill_gradientn(colours=wes_palette("Zissou1"))
-  + geom_density_ridges_gradient(scale=2)
+  + geom_density_ridges_gradient(scale=1.5)
   + scale_x_reverse()
   + theme_classic())
 ```
 
+# 
