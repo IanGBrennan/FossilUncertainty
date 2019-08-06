@@ -1,0 +1,92 @@
+Taxon,HI,HI_Source,Diet_Guild,Guild_Source,Alt_Diet_Guild,min_HI,max_HI,mean_HI,lognormal_mean,lognormal_sd
+Baringa_nelsonensis,1.325948038,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.139959432,1.433862434,1.325948038,0.255807632,0.113996771
+Baringa_sp_indet,1.139568249,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,0.793103448,1.339407745,1.139568249,0.055689646,0.249494543
+Bohra_bandharr,1.011976048,Couzens & Prideaux 2018,Unknown,NA,NA,1.011976048,1.011976048,1.011976048,0.011904903,NA
+Bohra_illuminata,0.937313433,Couzens & Prideaux 2018,Unknown,NA,NA,0.937313433,0.937313433,0.937313433,-0.064737546,NA
+Bohra_nullarbora,1.07229131,Couzens & Prideaux 2018,Unknown,NA,NA,0.996509599,1.148073022,1.07229131,0.067306672,0.070584682
+Bohra_sp_indet,1.223463687,Couzens & Prideaux 2018,Unknown,NA,NA,1.223463687,1.223463687,1.223463687,0.201685924,NA
+Bohra_wilkinsonorum_cf,0.767922236,Couzens & Prideaux 2018,Unknown,NA,NA,0.767922236,0.767922236,0.767922236,-0.264066807,NA
+Congruus_indra,0.8528,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,0.8528,0.8528,0.8528,-0.159230226,NA
+Congruus_sp_indet,1.235294118,Couzens & Prideaux 2018,Unknown,NA,NA,1.235294118,1.235294118,1.235294118,0.211309094,NA
+Dendrolagus_bennettianus,1.011588659,Couzens & Prideaux 2018,Browser,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,0.977722772,1.045454545,1.011588659,0.010961953,0.033468548
+Dendrolagus_dorianus,0.94,Janis 1990,Browser,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,NA,NA,NA,NA,NA
+Dendrolagus_goodfellowi,0.85,Janis 1990,Browser,Janis 1990; Arman & Prideaux 2015,NA,NA,NA,NA,NA,NA
+Dendrolagus_inustus,0.889990907,Couzens & Prideaux 2018,Browser,Janis et al. 2016,NA,NA,NA,NA,NA,NA
+Dendrolagus_lumholtzi,0.934272014,Couzens & Prideaux 2018,Browser,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,0.747767857,1.094736842,0.934272014,-0.094617004,0.185986639
+Dendrolagus_matschiei,0.91,Janis 1990,Browser,Janis 1990; Janis et al. 2016,NA,NA,NA,NA,NA,NA
+Dendrolagus_ursinus,0.8,Janis 1990,Browser,Janis 1990,NA,0.760869565,1.07748184,0.889990907,-0.110009568,0.173732508
+Dorcopsis_hageni,0.88,Janis 1990,Browser,Janis 1990; Janis et al. 2016,NA,NA,NA,NA,NA,NA
+Dorcopsis_luctosa,1.072653077,Couzens & Prideaux 2018,Browser,Groves & Flannery 1989,NA,1.026490066,1.152019002,1.072653077,0.078686939,0.05853697
+Dorcopsis_muelleri,1.195599022,Couzens & Prideaux 2018,Browser,Janis et al. 2016,NA,1.195599022,1.195599022,1.195599022,0.178647333,NA
+Dorcopsis_sp_indet,0.983796296,Couzens & Prideaux 2018,Browser,NA,NA,0.983796296,0.983796296,0.983796296,-0.016336419,NA
+Dorcopsis_veterum,1.02,Janis 1990,Browser,Janis 1990,NA,NA,NA,NA,NA,NA
+Dorcopsoides_fossilis,0.755431404,Couzens & Prideaux 2018,Browser,NA,NA,0.638623327,0.86,0.755431404,-0.296627775,0.146602751
+Dorcopsulus_macleayi,0.92,Janis 1990,Unknown,Janis 1990; Janis et al. 2016,NA,NA,NA,NA,NA,NA
+Dorcopsulus_vanheurni,0.97930398,Couzens & Prideaux 2018,Browser,Janis 1990; Janis et al. 2016,NA,0.882183908,1.12371134,0.97930398,-0.012349239,0.121683511
+Kurrabi_mahoneyi,1.433121019,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.433121019,1.433121019,1.433121019,0.359854597,NA
+Kurrabi_merriwaensis,1.161290323,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.161290323,1.161290323,1.161290323,0.149531734,NA
+Kurrabi_merriwaensis_cf,1.081874848,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.053977273,1.109772423,1.081874848,0.07836315,0.025782039
+Kurrabi_pelchenorum,0.967104207,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,0.762155059,1.086675291,0.967104207,-0.078375199,0.173534486
+Kurrabi_sp_indet,1.078305624,Couzens & Prideaux 2018,Unknown,NA,NA,0.981651376,1.174959872,1.078305624,0.071389751,0.089456036
+Lagorchestes_cf_sp_indet,1.114583333,Couzens & Prideaux 2018,Mixed_Feeder,NA,NA,1.114583333,1.114583333,1.114583333,0.108480643,NA
+Lagorchestes_conspicillatus,1.137810748,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990 (Browser); Janis et al. 2016; Arman & Prideaux 2015,Browser,0.981776765,1.212616822,1.137810748,0.099431318,0.105739694
+Lagorchestes_hirsutus,1.204778597,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990 (Browser); Janis et al. 2016; Arman & Prideaux 2015,Browser,0.988919668,1.601769912,1.204778597,0.205886231,0.242112579
+Lagostrophus_fasciatus,1.16,Janis 1990,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,NA,NA,NA,NA,NA
+Macropus_agilis,1.169200544,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015 (Grazer),Grazer,0.869218501,1.333958724,1.169200544,0.095506861,0.207359185
+Macropus_antilopinus,1.23,Janis 1990,Grazer,Janis 1990 (Mixed_Feeder); Janis et al. 2016; Arman & Prideaux 2015,Mixed_Feeder,NA,NA,NA,NA,NA
+Macropus_bernardus,1.12,Janis 1990,Grazer,Janis 1990 (Browser); Arman & Prideaux 2015,Browser,NA,NA,NA,NA,NA
+Macropus_cf_sp_indet,1.092269327,Couzens & Prideaux 2018,Unknown,NA,NA,1.092269327,1.092269327,1.092269327,0.088257483,NA
+Macropus_dorsalis,1.2,Janis 1990,Grazer,Janis 1990; Janis et al. 2016 (Mixed_Feeder); Arman & Prideaux 2015,Mixed_Feeder,NA,NA,NA,NA,NA
+Macropus_dryas,1.039570347,Couzens & Prideaux 2018,Mixed_Feeder,Dawson 2006 (Pliocene),NA,0.884462151,1.14792176,1.039570347,0.01540923,0.128782039
+Macropus_dryas_cf,1.172607749,Couzens & Prideaux 2018,Mixed_Feeder,Dawson 2006 (Pliocene),NA,1.093699515,1.282962963,1.172607749,0.16491171,0.080224853
+Macropus_eugenii,1.110947776,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,0.92,1.299107143,1.110947776,0.090004257,0.169542029
+Macropus_ferragus,1.045008183,Couzens & Prideaux 2018,Unknown,Dawson 2006,NA,1.045008183,1.045008183,1.045008183,0.044024716,NA
+Macropus_ferragus_cf,1.175682163,Couzens & Prideaux 2018,Unknown,Dawson 2006,NA,1.112382934,1.238981391,1.175682163,0.160401244,0.053801469
+Macropus_fuliginosus,1.36304428,Couzens & Prideaux 2018,Grazer,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,1.182989691,1.547418968,1.36304428,0.301938124,0.132954432
+Macropus_giganteus,1.33,Janis 1990,Grazer,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,NA,NA,NA,NA,NA
+Macropus_greyi,1.25,Janis 1990,Mixed_Feeder,Janis 1990,NA,NA,NA,NA,NA,NA
+Macropus_irma,1.1372544,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,0.964586847,1.303719008,1.1372544,0.115762473,0.148557753
+Macropus_parma,1.317604158,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990 (Grazer); Arman & Prideaux 2015,Grazer,1.229116945,1.406091371,1.317604158,0.27356505,0.067082122
+Macropus_parryi,1.347574416,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,1.326164875,1.368983957,1.347574416,0.298180058,0.015886463
+Macropus_pavana,1.182351106,Couzens & Prideaux 2018,Unknown,Dawson 2006 (Grazer in Pliocene),NA,1.051170859,1.313531353,1.182351106,0.161387692,0.110609465
+Macropus_pearsoni,1.399824987,Couzens & Prideaux 2018,Grazer,Dawson 2006,NA,1.285242291,1.514407684,1.399824987,0.333008271,0.081718399
+Macropus_robustus,1.241800252,Couzens & Prideaux 2018,Grazer,Janis 1990 (Mixed_Feeder); Janis et al. 2016; Arman & Prideaux 2015,Mixed_Feeder,1.041237113,1.377837116,1.241800252,0.189554098,0.138098964
+Macropus_rufogriseus,1.35,Janis 1990,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,NA,NA,NA,NA,NA
+Macropus_rufus,1.397882544,Couzens & Prideaux 2018,Grazer,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,1.234615385,1.632653061,1.397882544,0.34205882,0.140046235
+Macropus_sp_indet,1.293199605,Couzens & Prideaux 2018,Unknown,NA,NA,1.123039807,1.47515528,1.293199605,0.251024656,0.135134607
+Macropus_woodsi_cf,1.181472081,Couzens & Prideaux 2018,Grazer,Dawson 2006,NA,1.181472081,1.181472081,1.181472081,0.166761187,NA
+Onychogalea_fraenata,1.5,Janis 1990,Mixed_Feeder,Janis 1990; Arman & Prideaux 2015,NA,NA,NA,NA,NA,NA
+Onychogalea_unguifera,1.26947313,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,1.196498054,1.354312354,1.26947313,0.239792638,0.061963183
+Peradorcas_concinna,1.222222222,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Arman & Prideaux 2015,NA,1.222222222,1.222222222,1.222222222,0.200670695,0
+Petrogale_assimilis,1.166747863,Couzens & Prideaux 2018,Mixed_Feeder,Arman & Prideaux 2015,NA,NA,NA,NA,NA,NA
+Petrogale_brachyotis,1.007425743,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,1.007425743,1.007425743,1.007425743,0.007398307,NA
+Petrogale_cf_sp_indet,1.05342438,Couzens & Prideaux 2018,Unknown,NA,NA,0.86,1.1875,1.05342438,0.020560335,0.158288541
+Petrogale_godmani,1.82,Janis 1990,Mixed_Feeder,Janis 1990; Janis et al. 2016,NA,1.116740088,1.214814815,1.166747863,0.152782101,0.042036585
+Petrogale_inornata,1.65,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016,NA,1.102514507,1.137044968,1.119779737,0.113013153,0.0154175
+Petrogale_lateralis,1.207625706,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016,NA,1,1.34729064,1.207625706,0.158961822,0.146679388
+Petrogale_penicillata,1.285883458,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Arman & Prideaux 2015,NA,1.219008264,1.363821138,1.285883458,0.25273271,0.056157973
+Petrogale_purpureicollis,1.82,Petrogale godmani,Mixed_Feeder,NA,NA,NA,NA,NA,NA,NA
+Petrogale_rothschildi,1.4,Janis 1990,Mixed_Feeder,Janis 1990,NA,NA,NA,NA,NA,NA
+Petrogale_sp_indet,1.180091838,Couzens & Prideaux 2018,Unknown,NA,NA,1.133676093,1.218390805,1.180091838,0.162648248,0.036019068
+Petrogale_sp_nov1,1.112616588,Couzens & Prideaux 2018,Unknown,NA,NA,1.008264463,1.23573201,1.112616588,0.107168661,0.101503678
+Petrogale_sp_nov2,1.165477517,Couzens & Prideaux 2018,Unknown,NA,NA,1.064935065,1.33151184,1.165477517,0.165301606,0.113022758
+Petrogale_xanthopus,1.21,Janis 1990,Mixed_Feeder,Janis 1990; Arman & Prideaux 2015,NA,NA,NA,NA,NA,NA
+Prionotemnus_palankarinnicus,1.022154294,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,0.839552239,1.25388601,1.022154294,0.018206782,0.197991346
+Prionotemnus_palankarinnicus_cf,1.057139008,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.012359551,1.101918465,1.057139008,0.054669867,0.042340118
+Protemnodon_anak,1.086956522,Protemnodon snewini,Browser,Dawson 2006,NA,NA,NA,NA,NA,NA
+Protemnodon_buloloensis,0.886612022,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,0.886612022,0.886612022,0.886612022,-0.120347797,NA
+Protemnodon_cf_sp_indet,1.081534772,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.081534772,1.081534772,1.081534772,0.078381118,NA
+Protemnodon_devisi_cf,0.895278013,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,0.860074627,0.948953975,0.895278013,-0.104997909,0.049621878
+Protemnodon_snewini,1.086956522,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.086956522,1.086956522,1.086956522,0.083381609,0
+Protemnodon_sp_indet,1.056727403,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,0.95900858,1.214446953,1.056727403,0.066812837,0.119278218
+Setonix_brachyurus,1.019671639,Couzens & Prideaux 2018,Browser,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,0.852130326,1.172910663,1.019671639,0.002452052,0.157112576
+Thylogale_billardierii,1.123133143,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,0.935,1.247252747,1.123133143,0.086862844,0.141972482
+Thylogale_billardierii_cf,1.327977044,Couzens & Prideaux 2018,Unknown,NA,NA,1.185365854,1.470588235,1.327977044,0.277923477,0.1070821
+Thylogale_brunii,1,Janis 1990,Mixed_Feeder,Janis et al. 2016,NA,NA,NA,NA,NA,NA
+Thylogale_ignis,1.117206983,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.117206983,1.117206983,1.117206983,0.110831805,NA
+Thylogale_ignis_cf,1.06601467,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.06601467,1.06601467,1.06601467,0.063927087,NA
+Thylogale_sp_indet,1.035390145,Couzens & Prideaux 2018,Unknown,NA,NA,0.98206278,1.15776699,1.035390145,0.053155483,0.084960266
+Thylogale_stigmatica,1.189571454,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,0.986486486,1.464547677,1.189571454,0.174365177,0.195819205
+Thylogale_thetis,1.165237908,Couzens & Prideaux 2018,Mixed_Feeder,Janis 1990; Janis et al. 2016; Arman & Prideaux 2015,NA,0.992094862,1.325791855,1.165237908,0.139092168,0.143005701
+Wallabia_bicolor,1.121882601,Couzens & Prideaux 2018,Browser,Janis 1990 (Mixed_Feeder); Janis et al. 2016; Arman & Prideaux 2015 (Mixed_Feeder),Mixed_Feeder,0.990610329,1.241987179,1.121882601,0.105402377,0.112090435
+Wallabia_sp_indet,1.239669421,Couzens & Prideaux 2018,Browser,Janis 1990 (Mixed_Feeder); Janis et al. 2016; Arman & Prideaux 2015 (Mixed_Feeder),Mixed_Feeder,1.239669421,1.239669421,1.239669421,0.214844748,NA
