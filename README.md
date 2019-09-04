@@ -9,12 +9,12 @@ All analyses are detailed in the "Macropodoid_Modelling" files (.pdf, .html, .Rm
 # Tree Files:
   ### Part of this project was estimating trees under a number of different dating schemes. They're listed below:
    
-   + **Tree_Span.trees** - trees from posterior of all dating methods which show range of maximum and minimum estimated ages
-   + **Macropodinae_Fossil.trees** - trees from all posterior dating methods (similar to above), which also include fossil taxa lacking molecular/morphological data. These taxa are  constrained by age/topological priors
-   + Macropodinae_MaxAges - trees estimated with maximum tip ages
-   + Macropodinae_MeanAges - trees estimated with mean tip ages
-   + Macropodinae_MinAges - trees estimated with minimum tip ages
-   + Macropodinae_SampledAges - trees estimated with tip ages sampled from uniform priors
-   + Macropodinae_SampledAges_PriorOnly - trees estimated from the priors only, with tip ages sampled from uniform priors
+   + **Tree_Span.trees** - a sample of trees from posterior of all dating methods which show range of maximum and minimum estimated ages
+   + **Macropodinae_Fossil.trees** - a sample of trees from all posterior dating methods (similar to above), which also include fossil taxa lacking molecular/morphological data. These taxa are  constrained by age/topological priors in the starBEAST analyses.
+   + **Macropodinae_MaxAges** - post-burnin sample of trees estimated using maximum ages for fossil taxa.
+   + **Macropodinae_MeanAges** - post-burnin sample of trees estimated using mean ages for fossil taxa.
+   + **Macropodinae_MinAges** - post-burnin sample of trees estimated using minimum ages for fossil taxa.
+   + **Macropodinae_SampledAges** - post-burnin sample of trees estimated using tip ages sampled from uniform priors bounded by minimum and maximum fossil ages.
+   + **Macropodinae_SampledAges_PriorOnly** - post-burnin sample of trees estimated from the priors only, using tip ages sampled from uniform priors bounded by minimum and maximum fossil ages.
 
 
