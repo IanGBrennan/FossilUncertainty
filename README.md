@@ -9,8 +9,8 @@ All analyses are detailed in the "Macropodoid_Modelling" files (.pdf, .html, .Rm
 # Tree Files:
   ### Part of this project was estimating trees under a number of different dating schemes. They're listed below:
    
-   + Tree_Span.trees - trees from posterior of all dating methods which show range of maximum and minimum estimated ages
-   + Macropodinae_Fossil.trees - trees from the all posterior dating methods which include fossil taxa unsampled for molecular/morphological data, constrained by age/topological priors
+   + **Tree_Span.trees** - trees from posterior of all dating methods which show range of maximum and minimum estimated ages
+   + **Macropodinae_Fossil.trees** - trees from all posterior dating methods (similar to above), which also include fossil taxa lacking molecular/morphological data. These taxa are  constrained by age/topological priors
    + Macropodinae_MaxAges - trees estimated with maximum tip ages
    + Macropodinae_MeanAges - trees estimated with mean tip ages
    + Macropodinae_MinAges - trees estimated with minimum tip ages
