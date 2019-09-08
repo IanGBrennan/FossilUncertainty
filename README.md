@@ -19,8 +19,11 @@ All analyses are detailed in the "Macropodoid_Modelling" files (.pdf, .html, .Rm
 
 # Alignments:
   ### Molecular and morphological alignment files (nexus format)
-  
-   + **All_Macropodinae_...** 12s, 16s, CytB are mitochondrial markers
-   + **All_Macropodinae_...** APOB, BRCA1, IRBP, Pro1, RAG1, TRSP, vWF are all nuclear markers
+
+   + **All_Macropodinae_...nex** 12s, 16s, CytB are mitochondrial markers
+   + **All_Macropodinae_...nex** APOB, BRCA1, IRBP, Pro1, RAG1, TRSP, vWF are nuclear markers
    + **All_Macropodinae_Morphology.nex** is the morphological alignment file
+
+# Data
+  ### 
 

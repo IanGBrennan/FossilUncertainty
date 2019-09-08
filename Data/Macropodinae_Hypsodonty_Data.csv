@@ -1,4 +1,4 @@
-Taxon,HI,HI_Source,Diet_Guild,Guild_Source,Alt_Diet_Guild,min_HI,max_HI,mean_HI,lognormal_mean,lognormal_sd
+Taxon,HI,HI_Source,Diet_Guild,Guild_Source,Alt_Diet_Guild,min_HI,max_HI,mean_HI,lognormal_mean_error,lognormal_sd_error
 Baringa_nelsonensis,1.325948038,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,1.139959432,1.433862434,1.325948038,0.255807632,0.113996771
 Baringa_sp_indet,1.139568249,Couzens & Prideaux 2018,Browser,Dawson 2006,NA,0.793103448,1.339407745,1.139568249,0.055689646,0.249494543
 Bohra_bandharr,1.011976048,Couzens & Prideaux 2018,Unknown,NA,NA,1.011976048,1.011976048,1.011976048,0.011904903,NA

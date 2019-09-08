@@ -1,70 +1,70 @@
-﻿Complete_Sampling,Family,Subfamily,Tribe,Subgenus,Max_Last_Occurrence,Mean_Last_Occurrence,Min_Last_Occurrence,Source,Alt_Max,Alt_Estimated,Alt_Min,Alt_Source, 
-Aepyprymnus_rufescens,Potoroidae,Potoroinae,NA,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Bettongia_lesueur,Potoroidae,Potoroinae,NA,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Bettongia_penicillata,Potoroidae,Potoroinae,NA,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_bennettianus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_cf_scottae,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_dorianus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_goodfellowi,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_lumholtzi,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_matschiei,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_dorianus_cf_stellarum,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_dorianus_notatus     ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_dorianus_stellarum   ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_goodfellowi_buergersi   ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_goodfellowi_pulcherrimus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_inustus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_mbaiso ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_scottae,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dendrolagus_spadix ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dorcopsis_hageni,Macropodidae,Macropodinae,Dorcopsini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dorcopsis_veterum,Macropodidae,Macropodinae,Dorcopsini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Dorcopsulus_vanheurni,Macropodidae,Macropodinae,Dorcopsini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Hypsiprymnodon_moschatus,Hypsiprymnodontidae,Hypsiprymnodontinae,NA,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Lagorchestes_conspicillatus,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Lagorchestes_hirsutus,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Lagostrophus_fasciatus,Macropodidae,Lagostrophinae,NA,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_agilis,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_antilopinus,Macropodidae,Macropodinae,Macropodini,Osphranter,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_eugenii,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_fuliginosus,Macropodidae,Macropodinae,Macropodini,Macropus,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_giganteus,Macropodidae,Macropodinae,Macropodini,Macropus,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_irma,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_parma,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_parryi,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_robustus,Macropodidae,Macropodinae,Macropodini,Osphranter,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_rufogriseus,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Macropus_rufus,Macropodidae,Macropodinae,Macropodini,Osphranter,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Onychogalea_fraenata,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Onychogalea_unguifera,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Peradorcas_concinna,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_assimilis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_brachyotis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_burbidgei,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_herberti,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_inornata,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_lateralis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_penicillata,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_persephone,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_purpureicollis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_rothschildi,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Petrogale_xanthopus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Potorous_gilbertii,Potoroidae,Potoroinae,NA,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Potorous_longipes,Potoroidae,Potoroinae,NA,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Potorous_tridactylus,Potoroidae,Potoroinae,NA,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Setonix_brachyurus,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Thylogale_billardierii,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Thylogale_browni,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Thylogale_brunii,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Thylogale_stigmatica,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Thylogale_thetis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Wallabia_bicolor,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,0,0,0,Couzens & Prideaux 2018, 
-Protemnodon_anak,Macropodidae,Sthenurinae,NA,NA,0.042,0.039,0.036,Gillespie et al. 2012,2.588,0.012,1.3,Couzens & Prideaux 2018, 
-Simosthenurus_occidentalis,Macropodidae,Sthenurinae,NA,NA,0.0498,0.0474,0.045,Gillespie et al. 2012,0.146,0.1,0.089,Couzens & Prideaux 2018, 
-Baringa_nelsonensis,Macropodidae,Macropodinae,Macropodini,NA,2.588,1.6845,0.781,Fossilworks,1.77,0.8,0.781,Couzens & Prideaux 2018, 
-Bohra_illuminata,Macropodidae,Macropodinae,Dendrolagini,NA,2.588,1.3,0.012,Fossilworks,1,0.5,0.101,Couzens & Prideaux 2018, 
-Congruus_congruus,Macropodidae,Macropodinae,Macropodini,NA,0.135,0.07335,0.0117,Fossilworks,3.6,0.4,0.012,Couzens & Prideaux 2018, 
-Dorcopsoides_fossilis,Macropodidae,Macropodinae,Dorcopsini,NA,10,7.65,5.3,Fossilworks,11.608,7,5.332,Couzens & Prideaux 2018, 
-Kurrabi_mahoneyi,Macropodidae,Macropodinae,Macropodini,NA,5.3,4.45,3.6,Fossilworks,5.332,4,2.58,Couzens & Prideaux 2018, 
-Macropus_pavana,Macropodidae,Macropodinae,Macropodini,Macropus,5.3,4.415,3.53,Flannery & Archer 1984,5.332,4,3.6,Couzens & Prideaux 2018, 
-Prionotemnus_palankarinnicus,Macropodidae,Macropodinae,Macropodini,NA,5.332,2.672,0.012,Fossilworks,3.9,3.9,3.6,Couzens & Prideaux 2018, 
+﻿Complete_Sampling,Family,Subfamily,Tribe,Subgenus,Max_Last_Occurrence,Mean_Last_Occurrence,Min_Last_Occurrence,Source,Locality,Justification,Alt_Max,Alt_Estimated,Alt_Min,Alt_Source
+Aepyprymnus_rufescens,Potoroidae,Potoroinae,NA,NA,0,0,0,-,-,-,0,0,0,-
+Bettongia_lesueur,Potoroidae,Potoroinae,NA,NA,0,0,0,-,-,-,0,0,0,-
+Bettongia_penicillata,Potoroidae,Potoroinae,NA,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_bennettianus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_cf_scottae,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_dorianus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_goodfellowi,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_lumholtzi,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_matschiei,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_dorianus_cf_stellarum,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_dorianus_notatus     ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_dorianus_stellarum   ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_goodfellowi_buergersi   ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_goodfellowi_pulcherrimus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_inustus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_mbaiso ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_scottae,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dendrolagus_spadix ,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Dorcopsis_hageni,Macropodidae,Macropodinae,Dorcopsini,NA,0,0,0,-,-,-,0,0,0,-
+Dorcopsis_veterum,Macropodidae,Macropodinae,Dorcopsini,NA,0,0,0,-,-,-,0,0,0,-
+Dorcopsulus_vanheurni,Macropodidae,Macropodinae,Dorcopsini,NA,0,0,0,-,-,-,0,0,0,-
+Hypsiprymnodon_moschatus,Hypsiprymnodontidae,Hypsiprymnodontinae,NA,NA,0,0,0,-,-,-,0,0,0,-
+Lagorchestes_conspicillatus,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,-,-,0,0,0,-
+Lagorchestes_hirsutus,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,-,-,0,0,0,-
+Lagostrophus_fasciatus,Macropodidae,Lagostrophinae,NA,NA,0,0,0,-,-,-,0,0,0,-
+Macropus_agilis,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,-,-,0,0,0,-
+Macropus_antilopinus,Macropodidae,Macropodinae,Macropodini,Osphranter,0,0,0,-,-,-,0,0,0,-
+Macropus_eugenii,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,-,-,0,0,0,-
+Macropus_fuliginosus,Macropodidae,Macropodinae,Macropodini,Macropus,0,0,0,-,-,-,0,0,0,-
+Macropus_giganteus,Macropodidae,Macropodinae,Macropodini,Macropus,0,0,0,-,-,-,0,0,0,-
+Macropus_irma,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,-,-,0,0,0,-
+Macropus_parma,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,-,-,0,0,0,-
+Macropus_parryi,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,-,-,0,0,0,-
+Macropus_robustus,Macropodidae,Macropodinae,Macropodini,Osphranter,0,0,0,-,-,-,0,0,0,-
+Macropus_rufogriseus,Macropodidae,Macropodinae,Macropodini,Notamacropus,0,0,0,-,-,-,0,0,0,-
+Macropus_rufus,Macropodidae,Macropodinae,Macropodini,Osphranter,0,0,0,-,-,-,0,0,0,-
+Onychogalea_fraenata,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,-,-,0,0,0,-
+Onychogalea_unguifera,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,-,-,0,0,0,-
+Peradorcas_concinna,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_assimilis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_brachyotis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_burbidgei,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_herberti,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_inornata,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_lateralis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_penicillata,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_persephone,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_purpureicollis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_rothschildi,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Petrogale_xanthopus,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Potorous_gilbertii,Potoroidae,Potoroinae,NA,NA,0,0,0,-,-,-,0,0,0,-
+Potorous_longipes,Potoroidae,Potoroinae,NA,NA,0,0,0,-,-,-,0,0,0,-
+Potorous_tridactylus,Potoroidae,Potoroinae,NA,NA,0,0,0,-,-,-,0,0,0,-
+Setonix_brachyurus,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,-,-,0,0,0,-
+Thylogale_billardierii,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Thylogale_browni,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Thylogale_brunii,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Thylogale_stigmatica,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Thylogale_thetis,Macropodidae,Macropodinae,Dendrolagini,NA,0,0,0,-,-,-,0,0,0,-
+Wallabia_bicolor,Macropodidae,Macropodinae,Macropodini,NA,0,0,0,-,-,-,0,0,0,-
+Protemnodon_anak,Macropodidae,Sthenurinae,NA,NA,0.042,0.039,0.036,Gillespie et al. 2012,Mt. Cripps,Radiocarbon age,2.588,0.012,1.3,Couzens & Prideaux 2018
+Simosthenurus_occidentalis,Macropodidae,Sthenurinae,NA,NA,0.0498,0.0474,0.045,Gillespie et al. 2012,Mt. Cripps,Radiocarbon age,0.146,0.1,0.089,Couzens & Prideaux 2018
+Baringa_nelsonensis,Macropodidae,Macropodinae,Macropodini,NA,1.77,0.8,0.781,Piper 2007,Nelson Bay,"K/Ar dating, invertebrate biostratigraphy, paelomagnetism",1.77,0.8,0.781,Couzens & Prideaux 2018
+Bohra_illuminata,Macropodidae,Macropodinae,Dendrolagini,NA,2.588,1.3,0.012,"Shute, Prideaux & Worthy 2017; Megirian et al. 2010",Last Tree Cave,U/Th dating,0.365,0.2,0.101,Couzens & Prideaux 2018
+Congruus_congruus,Macropodidae,Macropodinae,Macropodini,NA,3.6,0.4,0.012,McNamara 1994; Megirian et al. 2010,SOS Cave,"Biocorrelated, Victoria Cave and Cathedral Cave",3.6,0.4,0.012,Couzens & Prideaux 2018
+Dorcopsoides_fossilis,Macropodidae,Macropodinae,Dorcopsini,NA,10,7.65,5.3,Megirian et al. 2010,Alcoota,"Late Miocene estimate, Ongeva LF boundary",11.608,7,5.332,Couzens & Prideaux 2018
+Kurrabi_mahoneyi,Macropodidae,Macropodinae,Macropodini,NA,5.3,4.45,3.6,Flannery & Archer 1984,Bow,"Biocorrelated, Mio-Pliocene Boundary, Plio-Pleistocene Boundary",5.332,4,2.58,Couzens & Prideaux 2018
+Macropus_pavana,Macropodidae,Macropodinae,Macropodini,Macropus,5.3,4.415,3.53,Flannery & Archer 1984; Mackness et al. 2000,Bluff Downs,"K/Ar dating, Mio-Pliocene Boundary",5.332,4,3.6,Couzens & Prideaux 2018
+Prionotemnus_palankarinnicus,Macropodidae,Macropodinae,Macropodini,NA,5.3,2.672,0.012,Piper et al. 2006; Megirian et al. 2010,Mampuwordu Sand,"Magnetostratigraphy, Toolapinna age",3.9,3.9,3.6,Couzens & Prideaux 2018
