@@ -34,10 +34,10 @@ Now read in the tree files we'll be working with
 #cp.min <- read.nexus("/PATH/Macro_CP_MinAges_CON.tre")
 #cp.mean <- read.nexus("/PATH/Macro_CP_EstAges_CON.tre")
 #cp.max <- read.nexus("/PATH/Macro_CP_MaxAges_CON.tre")
-sampled.trees   <- read.tree("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/REAL_Run5_AllSchemes_508trees_Macropodinae.trees")
-empirical.trees <- read.tree("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/MODEL110_Sampled_Run2_Macropodinae.trees")
-fossil.trees    <- read.tree("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/REAL_Run4_Fossil_519trees_Macropodinae.trees")
-consensus.tree  <- read.nexus("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Run5_Combined123_CON.tre")
+sampled.trees   <- read.tree("/Users/Ian/Google.Drive/ANU/Macropod_Dating/REAL_Run5_AllSchemes_508trees_Macropodinae.trees")
+empirical.trees <- read.tree("/Users/Ian/Google.Drive/ANU/Macropod_Dating/MODEL110_Sampled_Run2_Macropodinae.trees")
+fossil.trees    <- read.tree("/Users/Ian/Google.Drive/ANU/Macropod_Dating/REAL_Run4_Fossil_519trees_Macropodinae.trees")
+consensus.tree  <- read.nexus("/Users/Ian/Google.Drive/ANU/Macropod_Dating/Operators/REAL_Macropodinae_ALL/Run5_Combined123_CON.tre")
 ```
 
 Choose the current tree we want to work with
@@ -48,22 +48,22 @@ tree <- consensus.tree
 And the hypsodonty data
 ```{r}
 # raw data for all the macropodoid taxa
-all.HI           <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Data/CrownHeight_Data.csv", header=T)
+all.HI           <- read.csv("/Users/Ian/Google.Drive/ANU/Macropod_Dating/FossilUncertainty/Data/CrownHeight_Data.csv", header=T)
 # or just species means for the Macropodinae
-hypsodonty.index <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/FossilUncertainty/Data/CrownHeight_Macropodinae_spMEANS.csv", header=T)
+hypsodonty.index <- read.csv("/Users/Ian/Google.Drive/ANU/Macropod_Dating/FossilUncertainty/Data/Macropodinae_Hypsodonty_Data.csv", header=T)
 head(hypsodonty.index)
 ```
 
 The C4 plant reconstruction data from Andrae
 ```{r}
-enviro.data <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Andrae_S1.csv", header=T)
+enviro.data <- read.csv("/Users/Ian/Google.Drive/ANU/Macropod_Dating/Andrae_S1.csv", header=T)
   grass.data <- enviro.data[1:25, c(1,3)] 
   # this will also remove the last sample (from 9.5 mya) which is spurious, and keep just the mean estimate
 head(enviro.data); head(grass.data)
 ```
 And the dust flux data from Andrae
 ```{r}
-flux.data <- read.csv("/Users/Ian/Google.Drive/ANU Herp Work/Macropod_Dating/Aeolian_Flux.csv", header=T)
+flux.data <- read.csv("/Users/Ian/Google.Drive/ANU/Macropod_Dating/Aeolian_Flux.csv", header=T)
 head(flux.data)
 ```
 As well as the paleotemperature data
