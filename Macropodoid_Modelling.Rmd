@@ -16,7 +16,7 @@ library(RPANDA); library(randomcoloR)
 library(dplyr); library(gridExtra)
 library(geiger); library(phytools)
 library(parallel); library(pspline)
-library(mvMORPH); library(cladeMode)
+library(mvMORPH); #library(cladeMode)
 library(awtools); library(ggplot2); 
 library(ggridges); library(gridExtra)
 library(RColorBrewer); library(deeptime);
@@ -248,7 +248,7 @@ FLUXlin <- best.smoothing(macro.tree, macro.HI, time.data=flux.data,
 Lastly, for comparison, run a few standard models. These are Brownian Motion, Brownian Motion with a Trend, and Early Burst.
 ```{r}
 BM_res <-    fitContinuous(macro.tree, macro.HI, model="BM")
-trend_res <- fitContinuous(macro.tree, macro.HI, model="trend")
+trend_res <- fitContinuous(macro.tree, macro.HI, model="drift")
 EB_res <-    fitContinuous(macro.tree, macro.HI, model="EB")
 ```
 
@@ -319,7 +319,7 @@ for (k in 1:length(tree.span)){
   
   BM_res    <- fitContinuous(tree.span[[k]], mean.data, model="BM"); 
                int.results[["BM"]] <- BM_res
-  trend_res <- fitContinuous(tree.span[[k]], mean.data, model="trend"); 
+  trend_res <- fitContinuous(tree.span[[k]], mean.data, model="drift"); 
                int.results[["Trend"]] <- trend_res
   EB_res    <- fitContinuous(tree.span[[k]], mean.data, model="EB"); 
                int.results[["EB"]] <- EB_res
